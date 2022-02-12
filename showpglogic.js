@@ -6,6 +6,8 @@ navitem=[...navitem]
 navitem.forEach(nav=>{
    nav.addEventListener("click",(event)=>{
        console.log(event.target)
+       
+    pointingarrow.classList.remove("pointingarrowh")
        if(event.target.classList.contains("covehome"))
        {
            main.classList.add("show")
