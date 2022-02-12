@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://smtpjs.com/v3/smtp.js">
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+ 
+    <link rel="stylesheet" href="./css/formcontainer.css">
+</head>
+
+<body>
+    <div id="mailbutton" class="mailbutton">
+        
+        <span id="mailtext">Mail</span> 
+        <div id="cover"></div>
+        <form id="form" >
+            <div class="background"> </div>
+
+            <div class="heading">Send Mail</div>
+            <input type="text" name="" id="username" placeholder="Enter Name...">
+
+            <input type="text" name=""  id="phone" placeholder="Enter Phone/Email...">
+            <textarea name="" placeholder="Enter Query..." id="enquiry" cols="30" rows="10"></textarea>
+            <input type="button" id="submitbutton" value="Submit">
+            <div id="error" class="error"></div>
+            <div id="success" class="success"></div>
+            <div id="refresh" class="refresh"><i class="fa-solid fa-arrow-rotate-left"></i></div>
+        </form>
+    </div>
+
+    <script>
+        let mailbutton = document.getElementById("mailbutton")
+        let mailtext = document.getElementById("mailtext")
+        let form = document.getElementById("form")
+        let submitbutton = document.getElementById("submitbutton")
+        let cover =document.getElementById("cover")
+        console.log(mailbutton)
+        cover.addEventListener("click", (event) => {
+            
+                form.classList.toggle("show")
+                if(form.classList.contains("show"))
+                {
+                    mailbutton.classList.add("mailbuttonhover")
+                    mailtext.innerHTML=`<i class="fa-solid fa-envelope-open"></i>`
+                }
+                else{
+                    mailbutton.classList.remove("mailbuttonhover")
+                    mailtext.innerHTML=`<i class="fa-solid fa-envelope"></i>`
+
+                }
+            
+
+
+        })
+        function sendmail(userdetails) {
+            
+
+            Email.send({
+                Host: "smtp.gmail.com",
+                Username: "rajpersonalportfolio@gmail.com",
+                Password: "biadad21",
+                To: 'rajgopaljakhmola@gmail.com',
+                From: "rajpersonalportfolio@gmail.com",
+                Subject: "New Email from Portfolio Website",
+                Body: userdetails
+            }).then(
+                (message) => {
+                    console.log(message)
+                    if(message=="OK")
+                    {
+                        document.getElementById("success").textContent="Your Message has been sent Successfully"
+                        document.getElementById("success").classList.add("successshow")
+                    }
+                    
+                }
+            );
+        }
+        submitbutton.addEventListener("click",()=>{
+            let username = document.getElementById("username").value
+            let phone = document.getElementById("phone").value
+            let enquiry = document.getElementById("enquiry").value
+            let userdetails = `Username: ${username} 
+            Phone Number: ${phone}
+            Enquiry: ${enquiry}
+        `
+        let errors=[]
+        if(username===""||phone===""||enquiry==="")
+        {
+            
+            document.getElementById("error").classList.add("errorshowee")
+            if(username==="")
+            {
+                errors.push("*Please Enter your name<br/>")
+            }
+            if(phone==="")
+            {
+                errors.push("*Please enter your phone number<br/>")
+            }
+            if(enquiry==="")
+            {
+                errors.push("*Please enter your Enquiry")
+            }
+            
+            let text=errors.join('')
+            document.getElementById("error").innerHTML=text
+            
+        }
+        else{
+            document.getElementById("error").classList.remove("errorshowee")
+            sendmail(userdetails)
+        }
+        })
+        document.getElementById("refresh").addEventListener("click",()=>{
+            console.log("hello")
+            document.getElementById("username").value=""
+            document.getElementById("phone").value=""
+            document.getElementById("enquiry").value=""
+        })
+    </script>
+</body>
+
+</html>

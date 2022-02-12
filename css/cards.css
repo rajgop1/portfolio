@@ -1,0 +1,91 @@
+:root{
+    --blue:rgb(92, 92, 238);
+}
+.mainheading{
+    position: absolute;
+    background-color: var(--blue);
+    color:rgb(250, 240, 240);
+    text-shadow: 1px 2px 1px rgb(0, 0, 0);
+    height: 40px;
+    display: flex;
+    user-select: none;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.3rem;
+    top:0;
+    left:0;
+    right: 0;
+
+    padding: 10px 20px; 
+
+
+}
+main{
+    overflow: hidden;
+    position: relative;
+}
+
+.cards{
+    margin-top: 50px;
+    color:white;
+    display: grid;
+    width: 100%;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit,20rem);
+    gap: 10px;
+}
+.card{
+
+    padding: 10px;
+    border: 1px solid var(--blue);
+    position: relative;
+}
+.card .title{
+    font-size: 1.4rem;
+}
+.card .desc{
+    font-size:0.8rem;
+    color:rgb(199, 191, 191);
+}
+.card img{
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    transition: all 1s ;
+}
+.imgcontainer{
+    position: relative;
+    overflow: hidden;
+}
+
+
+.cardbutton{
+    position: absolute;   
+    top:20px;
+    right:20px;
+    padding:5px 10px;
+    background-color: var(--blue);
+    color:white;
+    border: none;
+    font-size: 1rem;
+    display: none;
+}
+.imgcontainer img:hover{
+    transform:  scale(1.1);   
+}
+.imgcontainer img:hover + .cardbutton{
+    display: block;
+}
+.imgcontainer:hover{
+    cursor: pointer;
+}
+.cardbutton:hover{
+    cursor: pointer;
+    display: block;
+}
+@media screen and (max-width:800px) {
+    .cards{
+        grid-template-columns: repeat(auto-fit,15rem);
+    }
+}

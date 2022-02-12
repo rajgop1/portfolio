@@ -1,0 +1,141 @@
+.myimgcontainer{
+    height: 200px;
+    width: 200px;
+    display: inline-block;
+    background-color: #ff0000;
+    border-radius: 50%;
+    overflow: hidden;
+    
+}
+.myimgcontainer .myphoto{
+
+    object-fit:cover;
+
+
+    object-position:10% 10%;
+
+    height: 200px;
+    width: 200px;
+    
+}
+.aboutme{
+    margin: 10px;
+
+    padding: 10px;
+    min-height: 100vh;
+}
+.aboutmetitle{
+    color:white;
+    font-size: 2rem;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    position: relative;   
+    z-index: -20;
+}
+.aboutmetitle::before, .aboutmetitle::after{
+    position: absolute;
+    content:"";
+    top:0;
+    left: 0;
+right: 0;
+    bottom: 0;
+}
+.aboutmetitle::before{
+    background-color: RGB(33, 33, 33);
+    animation: typewriter 3s steps(31) 2s forwards;
+}
+.aboutmetitle::after{
+    width: 0.125rem;
+    background: white;
+    animation:  typewriter 3s steps(31) 2s forwards ,
+    blink 0.8s steps(31) 0s 8,
+    fadeout 0.1s ease 6s forwards;
+    ;
+}
+
+@keyframes typewriter{
+    to{
+        left:100%;
+    }
+}
+@keyframes blink{
+    to{
+        background: transparent;
+    }
+}
+@keyframes fadeout{
+    to{
+        width:0;
+    }
+}
+.headingcontainer{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.aboutmedesc{
+    margin: 10px;
+    padding: 20px;
+    color:antiquewhite;
+    margin-left: 20px;
+    letter-spacing:2px;
+    text-align: center;
+    animation: fadeup 2s forwards 5s;
+}
+.welcomecontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color:white;
+    justify-content: center;
+    position: relative;
+    z-index:-1;
+
+}
+.homebuttonanimate{
+
+    animation: fadeup 1s ease forwards;
+}
+.homebuttonmore{
+    opacity: 0;
+    transform: translateY(1.5rem);
+    position: relative;
+    z-index:1;
+    cursor: pointer;
+}
+.welcome{
+    font-size: 1.5rem;
+    transform: translateY(3rem);
+    animation: fadeup 2s forwards 6s;
+    opacity: 0;
+}
+@keyframes fadeup{
+    to{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+
+
+
+
+@media screen and (max-width:600px) {
+    .aboutmetitle{
+        font-size: 1.05rem;
+        margin: 20px 0px;
+
+    }   
+    .welcome{
+        font-size: 1rem;
+    }
+    .aboutme, .welcomecontainer{
+        margin:5px;
+        
+    }   
+
+}

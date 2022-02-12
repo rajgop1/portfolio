@@ -1,0 +1,156 @@
+form{
+    display: flex;
+    flex-direction:column ;
+    
+    justify-content: center;
+    padding: 40px 40px;   
+    display: none;
+    cursor: default;
+
+    margin: 10px;
+
+    border: 1px solid rgb(81, 62, 209);
+}
+
+form >*{
+    padding: 5px 10px;
+    
+    color:white;
+    margin: 2px 2px;
+    border-radius: 10px;
+    border: 1px solid rgba(5, 8, 207, 0.65);
+}
+.mailbutton{
+    position: fixed;
+
+    bottom: 20px;
+    right: 20px;
+    height: 3rem;
+    width: 3rem;
+    cursor: pointer;
+    user-select: none;
+    background-color: rgb(65, 65, 231);
+    border-radius: 50%;
+    justify-content: center;
+    z-index: 100;
+    align-items: center;
+    display: flex;
+    color:white;
+}
+form{
+    position: absolute;
+    bottom:3.5rem;
+    background-color: white;
+    z-index: 3;
+    box-shadow: 1px 1px 2px 3px rgb(96, 110, 235),  -1px -1px 2px 3px rgb(61, 255, 43);
+    right:0px;
+}
+.mailbuttonhover{
+    box-shadow: 1px 1px 2px 2px rgba(8, 8, 8, 0.815),-1px -1px 2px 2px rgb(104, 124, 240);
+}
+.heading{
+    color:rgb(51, 51, 221);
+    font-size: 1.2rem;
+    top:0;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    
+}
+
+form .background{
+    height:50%;
+    clip-path: ellipse(250px 130px at 50% 40%) ;
+    border: none;
+    position: absolute;
+    z-index:-1;
+    border-radius: 0;
+    inset: 0;
+    background-color: rgb(66, 66, 233);
+}
+.show{
+    display:flex;
+}
+#submitbutton{
+    cursor: pointer;
+    background-color: rgb(101, 101, 223);
+    border: none;
+    color:rgb(174, 243, 174);
+}
+#submitbutton:hover{
+    color:rgb(5, 0, 75);
+    background-color: rgb(40, 240, 40);
+}
+
+#cover{
+    position: absolute;
+    height: 100%;
+    background-color: black;
+    width: 100%;
+    border-radius: 50%;
+    opacity: 0;
+    z-index: 101;
+}
+.error{
+    border-radius: 0;
+    border-color: red;
+    color:red;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: italic;
+    
+    display: none;
+}
+.errorshowee {
+    display: block;
+}
+.success{
+    background-color: rgb(38, 228, 38);
+    color:rgb(255, 255, 255);
+    text-shadow: 1px 2px 1px rgb(56, 55, 55);
+    border-radius: 0;
+    border: none;
+    display: none;
+}
+.successshow{
+    display: block;
+}
+
+.refresh{
+    color:rgb(31, 33, 187);
+    cursor: pointer;
+    position: absolute;
+    right:5px;
+    top:5px;
+    background-color: rgb(118, 240, 87);
+    border: 5px solid rgb(92, 241, 46);
+    border-radius: 50%;
+
+    
+    clip-path: circle();
+
+}
+@keyframes erroranimation
+{
+    from{
+
+    }
+    40%{
+        background-color: rgb(211, 82, 82);
+        color:white;
+    }
+    100%{
+        background-color: white;
+    }
+}
+
+@media screen and (max-width:800px){
+    form{
+        width:200px;
+
+        padding: 20px 20px;
+
+    }   
+    form>*{
+        margin: 2px 0px;
+    }
+}

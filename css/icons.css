@@ -1,0 +1,30 @@
+
+.fa-linkedin{
+    color:RGB(10, 102, 196);
+
+}
+.fa-github{
+    color:black
+}
+
+.fa-youtube{
+    color:RGB(254, 0, 0)
+}
+
+.socialcontainer{
+    background-color: rgba(255, 255, 255, 0.856);
+    font-size: 2rem;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.socialcontainer>*{
+    margin: 10px 20px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.socialcontainer>*:hover{
+    transform: scale(1.1);
+}

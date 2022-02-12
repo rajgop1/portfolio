@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raj Gopal</title>
+
+
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="./css/cards.css">
+    <link rel="stylesheet" href="./css/formcontainer.css">
+    <link rel="stylesheet" href="./css/aboutme.css">
+    <link rel="stylesheet" href="./css/icons.css">
+    <link rel="shortcut icon" href="./images/myphoto/toonme.png" type="image/png">
+    <script defer src="showpglogic.js"></script>
+    <script src="./textanimation.js" defer></script>
+</head>
+
+<body>
+    <div class="everycontainer">
+
+        <header>
+            <nav class="navbar">
+                <div class="home navitem ">
+                    <div class="covernavitem covehome"></div>
+                    <div id="pointingarrow" class="pointingarrow"><i class="fa-solid fa-arrow-left-long"></i></div>
+                    <i class="fa fa-home "></i><span class="show hide">Home</span>
+                </div>
+                <div class="about navitem ">
+                    <div class="covernavitem coveabo"></div>
+                    <i class="fa-solid fa-question "></i><span class="show hide">About</span>
+                </div>
+                <div class="contact navitem">
+                    <div class="covernavitem covecont"></div>
+                    <i class="fa-solid fa-address-book "></i> <span class="show hide">
+                        Contact</span>
+                </div>
+
+            </nav>
+        </header>
+        <!-- Cards Section -->
+        <main class="main" id="main">
+            <div class="mainheading">My Work...</div>
+            <div id="cards" class="cards">
+                <div id="card" class="card">
+                    <div class="imgcontainer">
+                        <img class="img"
+                            src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                            alt="">
+                        <button class="cardbutton">Open Website</button>
+                    </div>
+                    <div class="title">
+                        First Website
+                    </div>
+                    <div class="desc">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt ratione animi molestiae
+                        numquam aspernatur iusto dolorem? Soluta optio, repellat deserunt consectetur ducimus eius fuga
+                        in facere earum odio cum nostrum?
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- Cards Logic -->
+        <script>
+            const cardscontainer = document.getElementById("cards")
+            let mycard = document.getElementById("card")
+            mycard.style.display = "none"
+            fetch("./cards.json")
+                .then((res) => {
+                    return res.json()
+                })
+                .then((cards) => {
+                    cards.map((cardinfo) => {
+                        card(cardinfo.img, cardinfo.title, cardinfo.desc, cardinfo.link)
+
+                    })
+                })
+
+            function card(img, title, desc, link) {
+                let mynewcard = mycard.cloneNode(true)
+
+                mynewcard.removeAttribute("id")
+                mynewcard.style.display = "block"
+                let childrens = [...mynewcard.children]
+                childrens.map(child => {
+                    if (child.classList.contains("title")) {
+                        child.textContent = (title)
+                    }
+                    if (child.classList.contains("desc")) {
+                        child.textContent = (desc)
+                    }
+                    if (child.classList.contains("imgcontainer")) {
+                        let imgcontainerchild = [...child.children]
+                        imgcontainerchild.map((imgitems) => {
+                            if (imgitems.classList.contains("img")) {
+                                imgitems.src = img
+                            }
+                            if (imgitems.classList.contains("cardbutton")) {
+
+                                imgitems.setAttribute("onclick", `window.open("${link}")`)
+                            }
+                        })
+                    }
+                    cardscontainer.append(mynewcard)
+                })
+            }
+
+        </script>
+        <!-- Mail Button -->
+        <div id="mailbutton" class="mailbutton">
+
+            <span id="mailtext">Mail</span>
+            <div id="cover"></div>
+            <form id="form">
+                <div class="background"> </div>
+
+                <div class="heading">Send Mail</div>
+                <input type="text" name="" id="username" placeholder="Enter Name...">
+
+                <input type="text" name="" id="phone" placeholder="Enter Phone/Email...">
+                <textarea name="" placeholder="Enter Query..." id="enquiry" cols="30" rows="10"></textarea>
+                <input type="button" id="submitbutton" value="Submit">
+                <div id="error" class="error"></div>
+                <div id="success" class="success"></div>
+                <div id="refresh" class="refresh"><i class="fa-solid fa-arrow-rotate-left"></i></div>
+            </form>
+        </div>
+        <!-- Mail You Logic -->
+        <script>
+            let mailbutton = document.getElementById("mailbutton")
+            let mailtext = document.getElementById("mailtext")
+            let form = document.getElementById("form")
+            let submitbutton = document.getElementById("submitbutton")
+            let cover = document.getElementById("cover")
+            cover.addEventListener("click", (event) => {
+
+                form.classList.toggle("show")
+                if (form.classList.contains("show")) {
+                    mailbutton.classList.add("mailbuttonhover")
+                    mailtext.innerHTML = `<i class="fa-solid fa-envelope-open"></i>`
+                }
+                else {
+                    mailbutton.classList.remove("mailbuttonhover")
+                    mailtext.innerHTML = `<i class="fa-solid fa-envelope"></i>`
+
+                }
+
+
+
+            })
+            function sendmail(userdetails) {
+
+
+                Email.send({
+                    Host: "smtp.gmail.com",
+                    Username: "rajpersonalportfolio@gmail.com",
+                    Password: "biadad21",
+                    To: 'rajgopaljakhmola@gmail.com',
+                    From: "rajpersonalportfolio@gmail.com",
+                    Subject: "New Email from Portfolio Website",
+                    Body: userdetails
+                }).then(
+                    (message) => {
+                        if (message == "OK") {
+                            document.getElementById("success").textContent = "Your Message has been sent Successfully"
+                            document.getElementById("success").classList.add("successshow")
+                        }
+
+                    }
+                );
+            }
+            submitbutton.addEventListener("click", () => {
+                let username = document.getElementById("username").value
+                let phone = document.getElementById("phone").value
+                let enquiry = document.getElementById("enquiry").value
+                let userdetails = `Username: ${username} 
+            Phone Number: ${phone}
+            Enquiry: ${enquiry}
+        `
+                let errors = []
+                if (username === "" || phone === "" || enquiry === "") {
+
+                    document.getElementById("error").classList.add("errorshowee")
+                    if (username === "") {
+                        errors.push("*Please Enter your name<br/>")
+                    }
+                    if (phone === "") {
+                        errors.push("*Please enter your phone number<br/>")
+                    }
+                    if (enquiry === "") {
+                        errors.push("*Please enter your Enquiry")
+                    }
+
+                    let text = errors.join('')
+                    document.getElementById("error").innerHTML = text
+
+                }
+                else {
+                    document.getElementById("error").classList.remove("errorshowee")
+                    sendmail(userdetails)
+                }
+            })
+            document.getElementById("refresh").addEventListener("click", () => {
+                document.getElementById("username").value = ""
+                document.getElementById("phone").value = ""
+                document.getElementById("enquiry").value = ""
+            })
+        </script>
+        <!-- About me part -->
+        <div class="aboutme">
+            <div class="headingcontainer">
+                <div class="myimgcontainer">
+                    <img class="myphoto" src="./images/myphoto/my photo.jfif" alt="">
+                </div>
+                <div id="aboutmetitle" class="aboutmetitle">Hi My name is Rajgopal Jakhmola</div>
+            </div>
+            <div class="welcomecontainer">
+
+                <div class="welcome">Welcome to my Website!</div>
+                <div id="aboutmedesc" class="aboutmedesc">
+                    Hope You are doing fine!
+                    A little bit about myself...<br />
+                    I am a Computer Science Teacher who is technically certified in Software Applications Platforms.
+                    I am Specialized in getting students to understand the practical side of computers and Internet.
+                    Do you want to see my work?
+                    Click on Home Button from left side
+                    <i onclick="" class="fa-solid fa-house-chimney homebuttonmore" id="homebuttonmore"></i>
+                </div>
+
+            </div>
+        </div>
+        <div class="contactme">
+            <div class="contactmeheading">Connect With Me...</div>
+            <div class="socialcontainer">
+                <i onclick="window.open('https://www.linkedin.com/in/rajgopal-jakhmola-653024212/')"
+                    class="fa-brands fa-linkedin"></i>
+                <i onclick="window.open('https://github.com/rajgop1')" class="fa-brands fa-github"></i>
+                <i onclick="window.open('https://www.youtube.com/channel/UCV0qeIfpU0--CeW12VEyceQ')"
+                    class="fa-brands fa-youtube"></i>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
